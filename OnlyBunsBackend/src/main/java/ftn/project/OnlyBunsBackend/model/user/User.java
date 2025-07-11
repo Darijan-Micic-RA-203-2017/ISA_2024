@@ -2,17 +2,61 @@ package ftn.project.OnlyBunsBackend.model.user;
 
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import ftn.project.OnlyBunsBackend.model.address.Address;
 
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class User {
+	@Id
+	@SequenceGenerator(name = "user_id_generator", sequenceName = "user_ids_sequence", 
+		initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_generator")
+	@Column(name = "id", nullable = false, updatable = false, columnDefinition = "bigserial")
 	protected long id;
+
+	@Column(name = "is_enabled", nullable = false)
 	protected boolean isEnabled;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_roles_join_table", 
+		joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")}, 
+		inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
 	protected Set<UserRole> roles;
+
+	@Column(name = "username", nullable = false)
 	protected String username;
+
+	@JsonIgnore
+	@Column(name = "password", nullable = false)
 	protected String password;
+
+	@Column(name = "email_address", nullable = false)
 	protected String emailAddress;
+
+	@Column(name = "first_name", nullable = false)
 	protected String firstName;
+
+	@Column(name = "last_name", nullable = false)
 	protected String lastName;
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "residence_address_id")
 	protected Address residenceAddress;
 
 	public User() {}

@@ -2,8 +2,13 @@ package ftn.project.OnlyBunsBackend.model.user;
 
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import ftn.project.OnlyBunsBackend.model.address.Address;
 
+@Entity
+@Table(name = "system_administrators")
 public class SystemAdministrator extends User {
 	public SystemAdministrator() {
 		super();
