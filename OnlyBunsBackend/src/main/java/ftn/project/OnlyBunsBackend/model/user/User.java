@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,6 +23,7 @@ import ftn.project.OnlyBunsBackend.model.chat.Chat;
 import ftn.project.OnlyBunsBackend.model.post.Post;
 
 @Entity
+@Table(name = "users")
 public class User {
 	@Id
 	@SequenceGenerator(name = "user_id_generator", sequenceName = "user_ids_sequence", 
