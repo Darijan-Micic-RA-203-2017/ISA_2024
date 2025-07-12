@@ -2,16 +2,11 @@ package ftn.project.OnlyBunsBackend.model.address;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import ftn.project.OnlyBunsBackend.model.user.User;
 
 @Entity
 @Table(name = "addresses")
@@ -22,6 +17,12 @@ public class Address {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_id_generator")
 	@Column(name = "id", nullable = false, updatable = false, columnDefinition = "bigserial")
 	private long id;
+
+	@Column(name = "latitude", nullable = false)
+	private double latitude;
+
+	@Column(name = "longitude", nullable = false)
+	private double longitude;
 
 	@Column(name = "street_and_number", nullable = false)
 	private String streetAndNumber;
@@ -34,21 +35,18 @@ public class Address {
 
 	@Column(name = "country", nullable = false)
 	private String country;
-	
-	@OneToOne(mappedBy = "residenceAddress", fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	private User user;
 
 	public Address() {}
 
-	public Address(long id, String streetAndNumber, String postalCode, String populatedPlace, 
-			String country, User user) {
+	public Address(long id, double latitude, double longitude, String streetAndNumber, 
+			String postalCode, String populatedPlace, String country) {
 		this.id = id;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.streetAndNumber = streetAndNumber;
 		this.postalCode = postalCode;
 		this.populatedPlace = populatedPlace;
 		this.country = country;
-		this.user = user;
 	}
 
 	public long getId() {
@@ -57,6 +55,22 @@ public class Address {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 
 	public String getStreetAndNumber() {
@@ -89,13 +103,5 @@ public class Address {
 
 	public void setCountry(String country) {
 		this.country = country;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 }
