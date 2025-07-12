@@ -8,8 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -24,76 +22,75 @@ import ftn.project.OnlyBunsBackend.model.chat.Chat;
 import ftn.project.OnlyBunsBackend.model.post.Post;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class User {
+public class User {
 	@Id
 	@SequenceGenerator(name = "user_id_generator", sequenceName = "user_ids_sequence", 
 		initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_generator")
 	@Column(name = "id", nullable = false, updatable = false, columnDefinition = "bigserial")
-	protected long id;
+	private long id;
 
 	@Column(name = "is_enabled", nullable = false)
-	protected boolean isEnabled;
+	private boolean isEnabled;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles_join_table", 
 		joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")}, 
 		inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
-	protected Set<UserRole> roles;
+	private Set<UserRole> roles;
 
 	@Column(name = "username", nullable = false)
-	protected String username;
+	private String username;
 
 	@JsonIgnore
 	@Column(name = "password", nullable = false)
-	protected String password;
+	private String password;
 
 	@Column(name = "email_address", nullable = false)
-	protected String emailAddress;
+	private String emailAddress;
 
 	@Column(name = "first_name", nullable = false)
-	protected String firstName;
+	private String firstName;
 
 	@Column(name = "last_name", nullable = false)
-	protected String lastName;
+	private String lastName;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "residence_address_id")
-	protected Address residenceAddress;
+	private Address residenceAddress;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_following_join_table", 
 		joinColumns = {@JoinColumn(name = "follower_id", referencedColumnName = "id")}, 
 		inverseJoinColumns = {@JoinColumn(name = "followed_id", referencedColumnName = "id")})
-	protected Set<User> followedUsers;
+	private Set<User> followedUsers;
 
 	@Column(name = "number_of_followed_users", nullable = false, columnDefinition = "bigserial")
-	protected long numberOfFollowedUsers;
+	private long numberOfFollowedUsers;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_following_join_table", 
 		joinColumns = {@JoinColumn(name = "followed_id", referencedColumnName = "id")}, 
 		inverseJoinColumns = {@JoinColumn(name = "follower_id", referencedColumnName = "id")})
-	protected Set<User> followingUsers;
+	private Set<User> followingUsers;
 
 	@Column(name = "number_of_following_users", nullable = false, columnDefinition = "bigserial")
-	protected long numberOfFollowingUsers;
+	private long numberOfFollowingUsers;
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-	protected Set<Post> createdPosts;
+	private Set<Post> createdPosts;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "post_likes_join_table", 
 		joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")}, 
 		inverseJoinColumns = {@JoinColumn(name = "post_id", referencedColumnName = "id")})
-	protected Set<Post> likedPosts;
+	private Set<Post> likedPosts;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_chats_join_table", 
 		joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")}, 
 		inverseJoinColumns = {@JoinColumn(name = "chat_id", referencedColumnName = "id")})
-	protected Set<Chat> chats;
+	private Set<Chat> chats;
 
 	public User() {}
 
