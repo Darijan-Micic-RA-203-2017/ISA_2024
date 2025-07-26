@@ -17,44 +17,54 @@ INSERT INTO Addresses(id, latitude, longitude, street_and_number, postal_code, p
 
 -- Basic users:
 -- Password for this user is 'dMilosevic2000'.
-INSERT INTO Users(id, is_enabled, username, password, email_address, first_name, last_name, 
-	residence_address_id, number_of_followed_users, number_of_following_users) VALUES (1, true, 
+INSERT INTO Users(id, is_enabled, username, password, time_when_password_was_reset, email_address, 
+	first_name, last_name, residence_address_id, number_of_followed_users, 
+	number_of_following_users) VALUES (1, true, 
 	'DarkoMilosevic2000', '$2a$10$sBvg6L9Xk9iRHY7tnTd42OsCW25IctZGgD6YiNnMxXp/Dtzm/hLWW', 
-	'darko.milosevic@gmail.com', 'Darko', 'Milošević', 1, 3, 3);
+	'2025-05-03 21:57:59.000+01', 'darko.milosevic@gmail.com', 'Darko', 'Milošević', 
+	1, 3, 3);
 -- '1e8a7e71cd25d51fd5d4c3a0b8d931db9db113dc9ad235129618c0085987615d', 
 -- 'Vatroslava Jagića 9', 'Novi Sad', 'Srbija', '+381 649398427', '3105000710391', 'MALE', 
 -- 45.0466787283361, 20.077418481275856);
 -- Password for this user is 'pBorisavljevic1999'.
-INSERT INTO Users(id, is_enabled, username, password, email_address, first_name, last_name, 
-	residence_address_id, number_of_followed_users, number_of_following_users) VALUES (2, true, 
+INSERT INTO Users(id, is_enabled, username, password, time_when_password_was_reset, email_address, 
+	first_name, last_name, residence_address_id, number_of_followed_users, 
+	number_of_following_users) VALUES (2, true, 
 	'PavleBorisavljevic1999', '$2a$10$4MBoCfFOa8U0OrT8ZC34ZOhFAwh8MHpF7fMnXFurJX1VpbVvUsktq', 
-	'pavle.borisavljevic@gmail.com', 'Pavle', 'Borisavljević', 2, 0, 2);
+	'2025-05-02 08:34:02.000+01', 'pavle.borisavljevic@gmail.com', 'Pavle', 'Borisavljević', 
+	2, 0, 2);
 -- '2210b5da85e7867d0b4186f510ca4f6d0629012bc23f477cc405076b32028b3e', 
 -- 'Fruškogorska 37', 'Novi Sad', 'Srbija', '+381 63569456', '0601999710135', 'MALE', 
 -- 45.25076069584408, 19.824365676452167);
 -- Password for this user is 'mUrosevic1991'.
-INSERT INTO Users(id, is_enabled, username, password, email_address, first_name, last_name, 
-	residence_address_id, number_of_followed_users, number_of_following_users) VALUES (3, true, 
+INSERT INTO Users(id, is_enabled, username, password, time_when_password_was_reset, email_address, 
+	first_name, last_name, residence_address_id, number_of_followed_users, 
+	number_of_following_users) VALUES (3, true, 
 	'MilanaUrosevic1991', '$2a$10$ioMKVjvTZ2qqh4fKKOZnIu8IbqdeGjyEWRKynikFNWVOldEzBPE3u', 
-	'milana.urosevic@gmail.com', 'Milana', 'Urošević', 3, 3, 3);
+	'2025-05-03 16:07:42.000+01', 'milana.urosevic@gmail.com', 'Milana', 'Urošević', 
+	3, 3, 3);
 -- '8c54b356f293664914dd32b26df9e17649c127400d8bbf691d5ee9557d4730d9', 
 -- 'Laze Nančića 22', 'Novi Sad', 'Srbija', '+381 63682738', '1708991620486', 'FEMALE', 
 -- 45.24401166066522, 19.8475980669369572);
 
 -- System administrators:
 -- Password for this user is 'eRajkovic1986'.
-INSERT INTO Users(id, is_enabled, username, password, email_address, first_name, last_name, 
-	residence_address_id, number_of_followed_users, number_of_following_users) VALUES (4, true, 
+INSERT INTO Users(id, is_enabled, username, password, time_when_password_was_reset, email_address, 
+	first_name, last_name, residence_address_id, number_of_followed_users, 
+	number_of_following_users) VALUES (4, true, 
 	'EmilRajkovic1986', '$2a$10$jMY/yxEvMO239YWOSJL6f.7oRR7DQIbNEX89NmPOn1ee3dln9ELty', 
-	'emil.rajkovic@gmail.com', 'Emil', 'Rajković', 4, 4, 3);
+	'2025-05-04 10:44:25.000+01', 'emil.rajkovic@gmail.com', 'Emil', 'Rajković', 
+	4, 4, 3);
 -- '9ebde0d60831490561dc3d0e33896d46e2945374385d518f191a1d44aee586d1', 
 -- 'Almaška 14', 'Novi Sad', 'Srbija', '+381 623859070', '2702986710117', 'MALE', 
 -- 44.85856108034915, 20.363139670000777);
 -- Password for this user is 'oLukic1990'.
-INSERT INTO Users(id, is_enabled, username, password, email_address, first_name, last_name, 
-	residence_address_id, number_of_followed_users, number_of_following_users) VALUES (5, true, 
+INSERT INTO Users(id, is_enabled, username, password, time_when_password_was_reset, email_address, 
+	first_name, last_name, residence_address_id, number_of_followed_users, 
+	number_of_following_users) VALUES (5, true, 
 	'OliveraLukic1990', '$2a$10$LaO2qmww6/xwEVh1/rgL9Ol/7e6XZ5JosLddngJo8khkYC8QYGe36', 
-	'olivera.lukic@gmail.com', 'Olivera', 'Lukić', 5, 4, 3);
+	'2025-05-02 13:56:38.000+01', 'olivera.lukic@gmail.com', 'Olivera', 'Lukić', 
+	5, 4, 3);
 -- '2615b98b4a5b7ed324639b59ad01730f3faf188942ea7cfa132d3addf1f43df4', 
 -- 'Šumadijska 5', 'Novi Sad', 'Srbija', '+381 63770422', '2410990620808', 'FEMALE', 
 -- 45.25076069584408, 19.824365676452167, '2023-11-10 07:00:00.000+01');
