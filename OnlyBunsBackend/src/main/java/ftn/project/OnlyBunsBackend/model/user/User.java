@@ -1,5 +1,6 @@
 package ftn.project.OnlyBunsBackend.model.user;
 
+import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -16,6 +17,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import ftn.project.OnlyBunsBackend.model.address.Address;
@@ -24,7 +28,9 @@ import ftn.project.OnlyBunsBackend.model.post.Post;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
+	private static final long serialVersionUID = -407941114328952168L;
+
 	@Id
 	@SequenceGenerator(name = "user_id_generator", sequenceName = "user_ids_sequence", 
 		initialValue = 1, allocationSize = 1)
@@ -127,6 +133,7 @@ public class User {
 		this.id = id;
 	}
 
+	@Override
 	public boolean isEnabled() {
 		return isEnabled;
 	}
@@ -143,6 +150,7 @@ public class User {
 		this.roles = roles;
 	}
 
+	@Override
 	public String getUsername() {
 		return username;
 	}
@@ -151,6 +159,7 @@ public class User {
 		this.username = username;
 	}
 
+	@Override
 	public String getPassword() {
 		return password;
 	}
@@ -245,5 +254,29 @@ public class User {
 
 	public void setChats(Set<Chat> chats) {
 		this.chats = chats;
+	}
+
+	@JsonIgnore
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return roles;
+	}
+
+	@JsonIgnore
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@JsonIgnore
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@JsonIgnore
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
 	}
 }

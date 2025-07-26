@@ -14,11 +14,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user_roles")
-public class UserRole {
+public class UserRole implements GrantedAuthority {
+	private static final long serialVersionUID = -2348856153627702376L;
+
 	@Id
 	@SequenceGenerator(name = "user_role_id_generator", sequenceName = "user_role_ids_sequence", 
 		initialValue = 1, allocationSize = 1)
@@ -66,5 +70,11 @@ public class UserRole {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@JsonIgnore
+	@Override
+	public String getAuthority() {
+		return name;
 	}
 }
