@@ -1,6 +1,8 @@
 package ftn.project.OnlyBunsBackend.model.user;
 
+import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -54,6 +56,9 @@ public class User implements UserDetails {
 	@Column(name = "password", nullable = false)
 	private String password;
 
+	@Column(name = "time_when_password_was_reset", nullable = false)
+	private Timestamp timeWhenPasswordWasReset;
+
 	@Column(name = "email_address", nullable = false)
 	private String emailAddress;
 
@@ -103,15 +108,16 @@ public class User implements UserDetails {
 	public User() {}
 
 	public User(long id, boolean isEnabled, Set<UserRole> roles, String username, String password, 
-			String emailAddress, String firstName, String lastName, Address residenceAddress, 
-			Set<User> followedUsers, long numberOfFollowedUsers, Set<User> followingUsers, 
-			long numberOfFollowingUsers, Set<Post> createdPosts, Set<Post> likedPosts, 
-			Set<Chat> chats) {
+			Timestamp timeWhenPasswordWasReset, String emailAddress, String firstName, 
+			String lastName, Address residenceAddress, Set<User> followedUsers, 
+			long numberOfFollowedUsers, Set<User> followingUsers, long numberOfFollowingUsers, 
+			Set<Post> createdPosts, Set<Post> likedPosts, Set<Chat> chats) {
 		this.id = id;
 		this.isEnabled = isEnabled;
 		this.roles = roles;
 		this.username = username;
 		this.password = password;
+		this.timeWhenPasswordWasReset = timeWhenPasswordWasReset;
 		this.emailAddress = emailAddress;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -165,7 +171,18 @@ public class User implements UserDetails {
 	}
 
 	public void setPassword(String password) {
+		Timestamp currentTime = new Timestamp(new Date().getTime());
+		setTimeWhenPasswordWasReset(currentTime);
+
 		this.password = password;
+	}
+
+	public Timestamp getTimeWhenPasswordWasReset() {
+		return timeWhenPasswordWasReset;
+	}
+
+	public void setTimeWhenPasswordWasReset(Timestamp timeWhenPasswordWasReset) {
+		this.timeWhenPasswordWasReset = timeWhenPasswordWasReset;
 	}
 
 	public String getEmailAddress() {
